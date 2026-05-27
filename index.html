@@ -3,292 +3,470 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Baudhāyana Triples — Ganita Prakash Grade 8</title>
+<title>Baudhāyana Triples — Ch. 9</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;--surface:#ffffff;--surface2:#f0ede8;--border:#d8d4cc;
-  --text:#1a1814;--text2:#5a5650;--text3:#9a958e;
-  --accent:#c0392b;--blue:#2c7be5;--green:#1a7a4a;
-  --font:'DM Sans',-apple-system,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
+  --bg:#f4f2ec;--paper:#fff;--sand:#e8e4db;--ink:#1a1714;--rule:#ccc8be;
+  --blue:#1650a8;--blue-lt:#deeafa;--green:#1a6e42;--green-lt:#d5eed9;
+  --red:#b83020;--red-lt:#f5d0cb;--amber:#c47a0a;--amber-lt:#fef3d7;
+  --display:'Bebas Neue',Impact,sans-serif;
+  --mono:'DM Mono',monospace;--body:'DM Sans',sans-serif;
 }
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
-.page{max-width:920px;margin:0 auto;padding:32px 24px}
-.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.title{font-size:22px;font-weight:700;margin-bottom:6px}
-.subtitle{font-size:14px;color:var(--text2);margin-bottom:24px;max-width:580px;line-height:1.55}
-.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px}
-.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:14px}
+html{background:var(--bg)}
+body{font-family:var(--body);background:var(--bg);color:var(--ink);min-height:100vh;
+  -webkit-font-smoothing:antialiased;padding:0}
 
-/* Tabs */
-.tabs{display:flex;gap:4px;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:4px;margin-bottom:20px}
-.tab{flex:1;padding:8px 0;text-align:center;font-size:13px;font-weight:500;color:var(--text2);border-radius:7px;cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .12s}
-.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08);border:1.5px solid var(--border)}
+/* MASTHEAD */
+.masthead{border-bottom:3px solid var(--ink);padding:16px 28px 12px;
+  display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:baseline}
+.m-tag{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.4;white-space:nowrap}
+.m-title{font-family:var(--display);font-size:clamp(26px,7vw,58px);line-height:.92;
+  text-align:center;letter-spacing:.02em}
+.m-right{font-family:var(--mono);font-size:10px;opacity:.4;text-align:right;white-space:nowrap}
+@media(max-width:520px){.masthead{grid-template-columns:1fr}.m-tag,.m-right{display:none}}
 
-/* Grid of triples */
-.triples-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:16px}
-.triple-card{border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;background:var(--surface2);cursor:pointer;transition:all .12s}
-.triple-card:hover{border-color:#9a958e;background:var(--surface)}
-.triple-card.selected{border-color:var(--blue);background:#f0f5ff}
-.triple-card.primitive{border-left:3px solid var(--green)}
-.triple-card.scaled{border-left:3px solid #e08020}
-.triple-nums{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px}
-.triple-type{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.triple-type.prim{color:var(--green)}
-.triple-type.scal{color:#e08020}
+/* MODE TABS */
+.mode-bar{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:2px solid var(--ink)}
+.mode-btn{padding:11px 0;border:none;background:transparent;font-family:var(--mono);
+  font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink);opacity:.35;cursor:pointer;border-bottom:3px solid transparent;
+  margin-bottom:-2px;transition:all .15s;text-align:center;line-height:1.3}
+.mode-btn.active{opacity:1;border-bottom-color:var(--ink)}
 
-/* Filter */
-.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-.filter-row label{font-size:13px;font-weight:500;color:var(--text2)}
-.filter-row input[type=range]{width:120px;height:5px;accent-color:var(--blue)}
-.filter-val{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue);min-width:30px}
-.filter-check{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--text2);cursor:pointer}
-.filter-check input{accent-color:var(--green)}
+/* ══ BROWSE VIEW ══ */
+.browse-layout{display:grid;grid-template-columns:280px 1fr;min-height:500px}
+@media(max-width:660px){.browse-layout{grid-template-columns:1fr}}
 
-/* Detail panel */
-.detail{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:16px}
-.detail-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px}
-.detail-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-.detail-item{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px}
-.detail-item .eq{font-family:var(--mono);font-weight:700;color:var(--blue)}
+/* Left: grid */
+.browse-left{border-right:1px solid var(--rule);display:flex;flex-direction:column}
+.filter-bar{padding:12px 16px;background:var(--paper);border-bottom:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.fb-lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);opacity:.4;flex-shrink:0}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;min-width:80px;height:3px;
+  background:var(--rule);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+  width:18px;height:18px;border-radius:50%;background:var(--ink);
+  border:3px solid var(--bg);cursor:pointer}
+.fb-val{font-family:var(--display);font-size:22px;color:var(--ink);min-width:28px}
+.prim-toggle{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;
+  color:var(--ink);opacity:.6;cursor:pointer}
+.prim-toggle input{accent-color:var(--green);width:14px;height:14px}
 
-/* Odd square generator */
-.gen-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:540px){.gen-layout{grid-template-columns:1fr}}
-.gen-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:16px}
-.gen-card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:12px}
-.gen-step{font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6}
-.gen-step .eq{font-family:var(--mono);display:block;font-size:13px;color:var(--blue);margin:2px 0}
-.n-slider{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.n-slider label{font-size:13px;color:var(--text2);font-weight:500}
-.n-slider input[type=range]{flex:1;height:5px;accent-color:var(--accent)}
-.n-val{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--accent);min-width:24px;text-align:right}
+.triples-scroll{flex:1;overflow-y:auto;padding:10px}
+.triples-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tc{padding:10px 12px;border:1.5px solid var(--rule);background:var(--paper);
+  cursor:pointer;transition:all .12s;border-left:3px solid}
+.tc:hover{background:var(--sand)}
+.tc.sel{background:var(--ink);border-color:var(--ink)}
+.tc.sel .tc-nums{color:var(--bg)}
+.tc.sel .tc-type{color:rgba(255,255,255,.5)}
+.tc.prim{border-left-color:var(--green)}
+.tc.scaled{border-left-color:var(--amber)}
+.tc-nums{font-family:var(--display);font-size:17px;letter-spacing:.02em;color:var(--ink)}
+.tc-type{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);opacity:.4;margin-top:2px}
 
-/* Scaling demo */
-.scale-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
-.scale-label{font-size:13px;color:var(--text2);font-weight:500}
-input.k-inp{width:70px;padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-family:var(--mono);font-size:14px;text-align:center;background:var(--surface);color:var(--text);outline:none}
-input.k-inp:focus{border-color:var(--blue)}
-.scale-result{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green);background:#f0faf5;border:1.5px solid #b0e8cc;border-radius:8px;padding:8px 14px;margin-top:8px}
+/* Right: visual */
+.browse-right{padding:20px;display:flex;flex-direction:column;gap:0}
+.vis-head{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink);opacity:.4;margin-bottom:12px}
+canvas#tri-canvas{display:block;width:100%;max-height:280px}
+.triple-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;
+  border-top:1px solid var(--rule);margin-top:12px}
+.ts-cell{padding:12px 16px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:2px}
+.ts-cell:last-child{border-right:none}
+.ts-lbl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;opacity:.4}
+.ts-big{font-family:var(--display);font-size:clamp(22px,4vw,36px);line-height:1}
+.ts-big.blue{color:var(--blue)}
+.ts-big.red{color:var(--red)}
+.ts-big.green{color:var(--green)}
+.ts-sub{font-family:var(--mono);font-size:11px;opacity:.4}
+.detail-eq{padding:14px 20px;background:var(--ink);
+  font-family:var(--mono);font-size:13px;color:#f0ece3;line-height:1.8;
+  border-top:1px solid var(--rule);margin-top:auto}
+.detail-eq .b{color:#7aa8e8}.detail-eq .r{color:#e87a6a}.detail-eq .g{color:#6ec891}
+.detail-eq .a{color:#f7c96a}
 
-.insight{background:#fff8f0;border:1.5px solid #f0d8c0;border-radius:10px;padding:13px 18px;font-size:13.5px;color:#6b4400;line-height:1.6;margin-top:12px}
-.insight strong{color:#a05000}
+/* ══ GENERATE VIEW ══ */
+.gen-wrap{padding:24px 28px}
+.gen-head{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink);opacity:.4;margin-bottom:16px}
+.n-row{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.n-lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);opacity:.4;flex-shrink:0}
+.n-val{font-family:var(--display);font-size:40px;letter-spacing:.02em;color:var(--ink);min-width:40px}
+.odd-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.odd-chip{width:52px;height:52px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;border:2px solid var(--rule);font-family:var(--mono);font-size:13px;
+  font-weight:600;cursor:pointer;transition:all .15s;color:var(--ink)}
+.odd-chip.current{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.odd-chip.sq{background:var(--green-lt);border-color:var(--green);color:var(--green)}
+.odd-chip.sq.current{background:var(--green);color:#fff;border-color:var(--green)}
+.odd-chip .chip-sub{font-size:9px;font-weight:400;opacity:.6;margin-top:2px}
+.gen-result-box{padding:18px 20px;background:var(--paper);border:1.5px solid var(--rule);
+  font-family:var(--mono);font-size:13px;line-height:2;color:var(--ink)}
+.gen-result-box .hit{background:var(--green-lt);padding:8px 14px;display:inline-block;
+  font-family:var(--display);font-size:24px;letter-spacing:.04em;color:var(--green);margin-top:6px}
+.gen-result-box .miss{color:var(--ink);opacity:.5}
+canvas#gen-canvas{display:block;width:100%;height:60px;margin:12px 0}
+
+/* ══ SCALE VIEW ══ */
+.scale-wrap{padding:24px 28px}
+.prim-selector{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.ps-btn{padding:6px 14px;border:1.5px solid var(--rule);background:transparent;
+  font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink);opacity:.6;
+  cursor:pointer;transition:all .12s}
+.ps-btn:hover{border-color:var(--ink);opacity:1}
+.ps-btn.active{background:var(--ink);color:var(--bg);border-color:var(--ink);opacity:1}
+.k-row{display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.k-lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);opacity:.4;flex-shrink:0}
+.k-val{font-family:var(--display);font-size:36px;letter-spacing:.02em;color:var(--amber)}
+.family-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;
+  margin-bottom:16px}
+.fam-card{padding:12px 14px;border:1.5px solid var(--rule);background:var(--paper)}
+.fam-card.highlight{border-color:var(--amber);background:var(--amber-lt)}
+.fam-k{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;opacity:.4;margin-bottom:4px}
+.fam-nums{font-family:var(--display);font-size:18px;letter-spacing:.02em}
+.fam-check{font-family:var(--mono);font-size:11px;opacity:.45;margin-top:2px}
+
+/* INSIGHT */
+.insight-row{padding:16px 28px;display:grid;grid-template-columns:3px 1fr;gap:14px;
+  border-top:1px solid var(--rule)}
+.ins-bar{background:var(--amber)}
+.ins-text{font-size:13px;line-height:1.75;color:var(--ink);opacity:.7}
+.ins-text strong{opacity:1}
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="lbl">Chapter 2 · The Baudhāyana-Pythagoras Theorem</div>
-  <div class="title">Baudhāyana Triples</div>
-  <div class="subtitle">A Baudhāyana triple (a, b, c) satisfies a² + b² = c². Browse all triples up to 100, see which are primitive, and explore the odd-square method for generating new triples.</div>
 
-  <div class="card">
-    <div class="tabs">
-      <button class="tab active" id="t0">Browse triples</button>
-      <button class="tab" id="t1">Generate from odd squares</button>
-      <button class="tab" id="t2">Scale a triple</button>
-    </div>
+<div class="masthead">
+  <div class="m-tag">Ch. 9 · Baudhāyana–Pythagoras Theorem</div>
+  <div class="m-title">Baudhāyana Triples</div>
+  <div class="m-right">Grade 8 · Oxford / Bhanzu</div>
+</div>
 
-    <!-- BROWSE -->
-    <div id="viewBrowse">
-      <div class="filter-row">
-        <label>Max value:</label>
-        <input type="range" id="maxSlider" min="10" max="100" step="5" value="30">
-        <span class="filter-val" id="maxVal">30</span>
-        <label class="filter-check"><input type="checkbox" id="primOnly"> Primitive only</label>
+<div class="mode-bar">
+  <button class="mode-btn active" data-m="browse">Browse triples</button>
+  <button class="mode-btn" data-m="generate">Generate</button>
+  <button class="mode-btn" data-m="scale">Scale a triple</button>
+</div>
+
+<!-- ══ BROWSE ══ -->
+<div id="browse-view">
+  <div class="browse-layout">
+    <div class="browse-left">
+      <div class="filter-bar">
+        <span class="fb-lbl">Max</span>
+        <input type="range" id="max-sl" min="10" max="100" step="5" value="30">
+        <span class="fb-val" id="max-v">30</span>
+        <label class="prim-toggle"><input type="checkbox" id="prim-only"> Primitive only</label>
       </div>
-
-      <div class="triples-grid" id="triplesGrid"></div>
-
-      <div class="detail" id="detail" style="display:none">
-        <div class="detail-title" id="detailTitle"></div>
-        <div class="detail-row" id="detailRows"></div>
+      <div class="triples-scroll">
+        <div class="triples-grid" id="triples-grid"></div>
       </div>
-
-      <div class="insight" id="browseInsight"></div>
     </div>
-
-    <!-- GENERATE -->
-    <div id="viewGenerate" style="display:none">
-      <div class="gen-layout">
-        <div class="gen-card">
-          <div class="gen-card-title">The odd-square method</div>
-          <div class="gen-step">
-            Choose any odd number <strong>m</strong> that is a perfect square.<br>
-            It is the (n)th odd number where m = 2n − 1.
-            <span class="eq">Then: (n−1)² + m = n²</span>
-            Since m is a square, write m = k². So:
-            <span class="eq">(n−1)² + k² = n²</span>
-            This gives the triple <strong>(k, n−1, n)</strong>.
-          </div>
+    <div class="browse-right">
+      <div class="vis-head" id="vis-head">Select a triple to see its geometry</div>
+      <canvas id="tri-canvas" height="260"></canvas>
+      <div class="triple-stats" id="triple-stats" style="display:none">
+        <div class="ts-cell">
+          <div class="ts-lbl">a (blue)</div>
+          <div class="ts-big blue" id="ts-a">—</div>
+          <div class="ts-sub" id="ts-a-sq"></div>
         </div>
-        <div class="gen-card">
-          <div class="gen-card-title">Try it — choose n</div>
-          <div class="n-slider">
-            <label>n =</label>
-            <input type="range" id="nSlider" min="2" max="20" step="1" value="5">
-            <span class="n-val" id="nVal">5</span>
-          </div>
-          <div id="genResult"></div>
+        <div class="ts-cell">
+          <div class="ts-lbl">b (red)</div>
+          <div class="ts-big red" id="ts-b">—</div>
+          <div class="ts-sub" id="ts-b-sq"></div>
+        </div>
+        <div class="ts-cell">
+          <div class="ts-lbl">c (green)</div>
+          <div class="ts-big green" id="ts-c">—</div>
+          <div class="ts-sub" id="ts-c-sq"></div>
         </div>
       </div>
-      <div class="insight" style="margin-top:16px" id="genInsight">
-        This method produces triples where one smaller side is exactly 1 less than the hypotenuse. It does not generate all primitive triples — for example (8, 15, 17) cannot be made this way.
-      </div>
+      <div class="detail-eq" id="detail-eq" style="display:none"></div>
     </div>
+  </div>
+  <div class="insight-row" id="browse-insight"></div>
+</div>
 
-    <!-- SCALE -->
-    <div id="viewScale" style="display:none">
-      <div style="margin-bottom:16px;font-size:13.5px;color:var(--text2);line-height:1.6">
-        If (a, b, c) is a Baudhāyana triple, then (ka, kb, kc) is also a triple for any positive integer k. This is because (ka)²+(kb)²=k²(a²+b²)=k²c²=(kc)².
-      </div>
-      <div style="margin-bottom:16px">
-        <div class="card-title">Choose a primitive triple</div>
-        <div class="triples-grid" id="primGrid" style="max-height:200px;overflow-y:auto"></div>
-      </div>
-      <div class="scale-row">
-        <span class="scale-label">Scale factor k =</span>
-        <input type="number" class="k-inp" id="kInput" min="1" max="20" value="2">
-      </div>
-      <div class="scale-result" id="scaleResult"></div>
-      <div class="insight" style="margin-top:12px">
-        Scaled triples are not primitive — they share a common factor k. The primitive triple is the "seed" of an infinite family of triples. Baudhāyana listed several primitive triples: (3,4,5), (5,12,13), (8,15,17), (7,24,25), (12,35,37).
-      </div>
+<!-- ══ GENERATE ══ -->
+<div id="generate-view" style="display:none">
+  <div class="gen-wrap">
+    <div class="gen-head">The odd-square method — choose n</div>
+    <div class="n-row">
+      <span class="n-lbl">n =</span>
+      <span class="n-val" id="n-disp">5</span>
+      <input type="range" id="n-sl" min="2" max="25" step="1" value="5" style="flex:1;max-width:300px">
     </div>
+    <div class="gen-head">Odd numbers — green = perfect square, tap to jump</div>
+    <div class="odd-strip" id="odd-strip"></div>
+    <canvas id="gen-canvas" height="60"></canvas>
+    <div class="gen-result-box" id="gen-result"></div>
+  </div>
+  <div class="insight-row">
+    <div class="ins-bar"></div>
+    <p class="ins-text">The nth odd number is (2n−1). When this is a perfect square k², it gives the triple <strong>(k, n−1, n)</strong>. This works because (n−1)² + k² = n². The method generates triples where one leg is just 1 less than the hypotenuse — but not all primitive triples (e.g. 8,15,17 needs a different method).</p>
+  </div>
+</div>
+
+<!-- ══ SCALE ══ -->
+<div id="scale-view" style="display:none">
+  <div class="scale-wrap">
+    <div class="gen-head">Choose a primitive triple</div>
+    <div class="prim-selector" id="prim-selector"></div>
+    <div class="k-row">
+      <span class="k-lbl">Scale factor k =</span>
+      <span class="k-val" id="k-disp">1</span>
+      <input type="range" id="k-sl" min="1" max="10" step="1" value="1" style="flex:1;max-width:260px">
+    </div>
+    <div class="gen-head">The whole family (k = 1 to 8)</div>
+    <div class="family-grid" id="family-grid"></div>
+  </div>
+  <div class="insight-row">
+    <div class="ins-bar"></div>
+    <p class="ins-text">If (a,b,c) is a triple, so is (ka, kb, kc) for any k — because (ka)²+(kb)² = k²(a²+b²) = k²c² = (kc)². Every scaled triple has a GCD > 1. The <strong>primitive triple</strong> is the irreducible seed of an infinite family.</p>
   </div>
 </div>
 
 <script>
-function gcd(a,b){return b===0?a:gcd(b,a%b);}
-function isPrime(a,b,c){return gcd(gcd(a,b),c)===1;}
-function isTriple(a,b,c){return a*a+b*b===c*c;}
+const BLUE='#1650a8',RED='#b83020',GREEN='#1a6e42';
+const BLUE_F='rgba(22,80,168,.18)',RED_F='rgba(184,48,32,.15)',GREEN_F='rgba(26,110,66,.18)';
 
-// Generate all triples up to max
+function gcd(a,b){return b===0?a:gcd(b,a%b);}
+function isPrim(a,b,c){return gcd(gcd(a,b),c)===1;}
+
 function getAllTriples(max){
-  const triples=[];
+  const t=[];
   for(let a=1;a<=max;a++)
     for(let b=a;b<=max;b++){
-      const c2=a*a+b*b;
-      const c=Math.round(Math.sqrt(c2));
-      if(c<=max&&c*c===c2) triples.push({a,b,c,prim:isPrime(a,b,c)});
+      const c2=a*a+b*b,c=Math.round(Math.sqrt(c2));
+      if(c<=max&&c*c===c2) t.push({a,b,c,prim:isPrim(a,b,c)});
     }
-  return triples;
+  return t;
 }
 
-let selectedTriple=null;
-let selectedPrimTriple={a:3,b:4,c:5};
+// ══ TRIANGLE CANVAS ══
+function drawTriple(canvasId,a,b,c){
+  const cvs=document.getElementById(canvasId);
+  const PR=Math.min(window.devicePixelRatio||1,2);
+  const W=cvs.parentElement.clientWidth;
+  const H=parseInt(cvs.getAttribute('height'))||260;
+  cvs.width=W*PR; cvs.height=H*PR;
+  cvs.style.width=W+'px'; cvs.style.height=H+'px';
+  const ctx=cvs.getContext('2d');
+  ctx.scale(PR,PR);
+  ctx.fillStyle='var(--bg,#f4f2ec)'.replace('var(--bg,','').replace(')','');
+  ctx.fillStyle='#f4f2ec'; ctx.fillRect(0,0,W,H);
 
-// ── Browse ────────────────────────────────────────────────────────────────
+  if(!a) return;
+
+  // Place right angle at bottom-left
+  // Scale: fit a-square+c-square in width, b-square+c-square in height
+  const PAD=28;
+  const scale=Math.min((W-PAD*2)/(a+c+4),(H-PAD*2)/(b+c+4));
+  const sa=a*scale,sb=b*scale,sc=c*scale;
+
+  const ox=PAD+sc+8, oy=H-PAD-sc-8; // right-angle vertex
+
+  const O={x:ox,y:oy};
+  const A={x:ox+sa,y:oy};    // along x
+  const B={x:ox,y:oy-sb};    // up
+
+  function fillPoly(pts,fill,stroke,lw){
+    ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();
+    ctx.strokeStyle=stroke;ctx.lineWidth=lw;ctx.stroke();
+  }
+
+  // Square on a (blue, below)
+  fillPoly([O,A,{x:A.x,y:A.y+sa},{x:O.x,y:O.y+sa}],BLUE_F,BLUE,2);
+  // Square on b (red, left)
+  fillPoly([O,B,{x:B.x-sb,y:B.y},{x:O.x-sb,y:O.y}],RED_F,RED,2);
+  // Square on c (green, outer hyp)
+  const dx=B.x-A.x,dy=B.y-A.y;
+  const py2=dy,px2=-dy; // perp CW
+  const pLen=Math.hypot(px2,py2);
+  const C2={x:A.x+px2/pLen*sc,y:A.y+py2/pLen*sc};
+  const D2={x:B.x+px2/pLen*sc,y:B.y+py2/pLen*sc};
+  fillPoly([A,B,D2,C2],GREEN_F,GREEN,2);
+
+  // Triangle
+  fillPoly([O,A,B],'rgba(255,255,255,.55)','#1a1714',2.5);
+
+  // Right angle mark
+  const rm=Math.min(12,sa*0.18,sb*0.18);
+  ctx.strokeStyle='#1a1714';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(ox+rm,oy);ctx.lineTo(ox+rm,oy-rm);ctx.lineTo(ox,oy-rm);ctx.stroke();
+
+  // Area labels inside squares
+  function labelSq(cx,cy,text,col,sz){
+    ctx.fillStyle=col;ctx.font=`bold ${Math.max(9,sz)}px DM Mono`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(text,cx,cy);ctx.textBaseline='alphabetic';
+  }
+  labelSq(ox+sa/2,oy+sa/2,`a²=${a*a}`,BLUE,Math.min(14,sa*0.22));
+  labelSq(ox-sb/2,oy-sb/2,`b²=${b*b}`,RED,Math.min(14,sb*0.22));
+  const cCx=(A.x+B.x+C2.x+D2.x)/4,cCy=(A.y+B.y+C2.y+D2.y)/4;
+  labelSq(cCx,cCy,`c²=${c*c}`,GREEN,Math.min(13,sc*0.18));
+
+  // Side labels
+  const fs=Math.min(13,Math.max(9,scale*a*0.18));
+  ctx.fillStyle=BLUE;ctx.font=`600 ${fs}px DM Mono`;ctx.textAlign='center';
+  ctx.fillText(`a=${a}`,ox+sa/2,oy+14);
+  ctx.save();ctx.translate(ox-14,oy-sb/2);ctx.rotate(-Math.PI/2);
+  ctx.fillStyle=RED;ctx.fillText(`b=${b}`,0,0);ctx.restore();
+  const hm={x:(A.x+B.x)/2,y:(A.y+B.y)/2};
+  const pn=Math.hypot(px2,py2);
+  ctx.fillStyle=GREEN;ctx.font=`600 ${fs}px DM Mono`;ctx.textAlign='center';
+  ctx.fillText(`c=${c}`,hm.x+px2/pn*16,hm.y+py2/pn*16);
+}
+
+// ══ BROWSE ══
+let selTriple=null;
+
 function renderBrowse(){
-  const max=parseInt(document.getElementById('maxSlider').value);
-  const primOnly=document.getElementById('primOnly').checked;
+  const max=+document.getElementById('max-sl').value;
+  const primOnly=document.getElementById('prim-only').checked;
   let triples=getAllTriples(max);
   if(primOnly) triples=triples.filter(t=>t.prim);
-
-  const grid=document.getElementById('triplesGrid');
+  const grid=document.getElementById('triples-grid');
   grid.innerHTML='';
   triples.forEach(t=>{
-    const card=document.createElement('div');
-    card.className='triple-card '+(t.prim?'primitive':'scaled')+(selectedTriple&&selectedTriple.a===t.a&&selectedTriple.b===t.b?' selected':'');
-    card.innerHTML=`<div class="triple-nums">(${t.a}, ${t.b}, ${t.c})</div>
-      <div class="triple-type ${t.prim?'prim':'scal'}">${t.prim?'Primitive':'Scaled'}</div>`;
-    card.onclick=()=>{selectedTriple=t;renderBrowse();showDetail(t);};
-    grid.appendChild(card);
+    const div=document.createElement('div');
+    const sel=selTriple&&selTriple.a===t.a&&selTriple.b===t.b;
+    div.className=`tc ${t.prim?'prim':'scaled'}${sel?' sel':''}`;
+    div.innerHTML=`<div class="tc-nums">(${t.a},${t.b},${t.c})</div>
+      <div class="tc-type">${t.prim?'Primitive':'Scaled'}</div>`;
+    div.addEventListener('click',()=>{selTriple=t;renderBrowse();showTriple(t);});
+    grid.appendChild(div);
   });
-
-  const primCount=triples.filter(t=>t.prim).length;
-  document.getElementById('browseInsight').innerHTML=
-    `<strong>${triples.length} triples</strong> with all values ≤ ${max} (${primCount} primitive, ${triples.length-primCount} scaled). Select any triple to see its properties. Notice that every scaled triple has a primitive triple "parent" — dividing all three values by their GCD gives it.`;
+  const pCount=triples.filter(t=>t.prim).length;
+  document.getElementById('browse-insight').innerHTML=`<div class="ins-bar" style="background:var(--amber)"></div><p class="ins-text"><strong>${triples.length} triples</strong> with all values ≤ ${max} — ${pCount} primitive, ${triples.length-pCount} scaled. Primitive triples have no common factor. Every scaled triple is a primitive triple multiplied by some k.</p>`;
 }
 
-function showDetail(t){
-  const el=document.getElementById('detail');
-  el.style.display='block';
-  document.getElementById('detailTitle').textContent=`(${t.a}, ${t.b}, ${t.c})`;
-  const g=gcd(gcd(t.a,t.b),t.c);
-  const rows=document.getElementById('detailRows');
-  rows.innerHTML=`
-    <div class="detail-item">a²+b²=c²<br><span class="eq">${t.a}²+${t.b}²=${t.a*t.a+t.b*t.b}=${t.c}²</span></div>
-    <div class="detail-item">Type<br><span class="eq">${t.prim?'Primitive':'Scaled (÷'+g+')'}</span></div>
-    ${!t.prim?`<div class="detail-item">Primitive parent<br><span class="eq">(${t.a/g}, ${t.b/g}, ${t.c/g})</span></div>`:''}
-    <div class="detail-item">GCD(a,b,c)<br><span class="eq">${g}</span></div>`;
+function showTriple(t){
+  const {a,b,c}=t;
+  document.getElementById('vis-head').textContent=`(${a}, ${b}, ${c})  —  ${t.prim?'Primitive':'Scaled'} triple`;
+  drawTriple('tri-canvas',a,b,c);
+  document.getElementById('triple-stats').style.display='grid';
+  document.getElementById('ts-a').textContent=a;document.getElementById('ts-a-sq').textContent=`a² = ${a*a}`;
+  document.getElementById('ts-b').textContent=b;document.getElementById('ts-b-sq').textContent=`b² = ${b*b}`;
+  document.getElementById('ts-c').textContent=c;document.getElementById('ts-c-sq').textContent=`c² = ${c*c}`;
+  const g=gcd(gcd(a,b),c);
+  const deq=document.getElementById('detail-eq');
+  deq.style.display='block';
+  deq.innerHTML=`<span class="b">${a}²</span> + <span class="r">${b}²</span> = <span class="g">${c}²</span>  →  <span class="b">${a*a}</span> + <span class="r">${b*b}</span> = <span class="g">${c*c}</span>  ✓\n`+
+    (t.prim?`GCD(${a},${b},${c}) = 1  →  Primitive`:`GCD(${a},${b},${c}) = ${g}  →  Scaled · parent = <span class="a">(${a/g}, ${b/g}, ${c/g})</span>`);
 }
 
-document.getElementById('maxSlider').oninput=e=>{document.getElementById('maxVal').textContent=e.target.value;renderBrowse();};
-document.getElementById('primOnly').onchange=renderBrowse;
+document.getElementById('max-sl').addEventListener('input',e=>{document.getElementById('max-v').textContent=e.target.value;renderBrowse();});
+document.getElementById('prim-only').addEventListener('change',renderBrowse);
 
-// ── Generate ──────────────────────────────────────────────────────────────
+// ══ GENERATE ══
 function renderGenerate(){
-  const n=parseInt(document.getElementById('nSlider').value);
-  document.getElementById('nVal').textContent=n;
-  const m=2*n-1; // nth odd number
-  const isSq=Number.isInteger(Math.sqrt(m));
-  const div=document.getElementById('genResult');
+  const n=+document.getElementById('n-sl').value;
+  document.getElementById('n-disp').textContent=n;
+  const strip=document.getElementById('odd-strip');
+  strip.innerHTML='';
+  const maxN=25;
+  for(let i=2;i<=maxN;i++){
+    const m=2*i-1;
+    const isSq=Number.isInteger(Math.sqrt(m))&&Math.sqrt(m)===Math.floor(Math.sqrt(m));
+    const chip=document.createElement('div');
+    chip.className=`odd-chip${isSq?' sq':''}${i===n?' current':''}`;
+    chip.innerHTML=`${m}<div class="chip-sub">n=${i}</div>`;
+    chip.addEventListener('click',()=>{
+      document.getElementById('n-sl').value=i;
+      renderGenerate();
+    });
+    strip.appendChild(chip);
+  }
+
+  const m=2*n-1;
+  const sqN=Math.round(Math.sqrt(m));
+  const isSq=sqN*sqN===m;
+  const res=document.getElementById('gen-result');
+
   if(isSq){
-    const k=Math.round(Math.sqrt(m));
-    const a=k,b=n-1,c=n;
-    div.innerHTML=`<div class="gen-step">
-      <strong>n = ${n}</strong>: The ${n}th odd number is <span style="font-family:var(--mono);font-weight:700;color:var(--accent)">${m}</span>.
-      <span class="eq">${m} = ${k}² — it IS a perfect square!</span>
-      <span class="eq">(n−1)² + m = n²</span>
-      <span class="eq">${b}² + ${k}² = ${c}²</span>
-      <span class="eq">${b*b} + ${k*k} = ${c*c} ✓</span>
-      Triple: <strong style="font-family:var(--mono);font-size:16px;color:var(--green)">(${Math.min(a,b)}, ${Math.max(a,b)}, ${c})</strong>
-      ${isPrime(Math.min(a,b),Math.max(a,b),c)?'<span style="font-size:12px;color:var(--green)">Primitive triple</span>':'<span style="font-size:12px;color:#e08020">Scaled triple</span>'}
-    </div>`;
+    const k=sqN,a2=n-1,c2=n;
+    const triple=`(${Math.min(k,a2)}, ${Math.max(k,a2)}, ${c2})`;
+    const p=isPrim(Math.min(k,a2),Math.max(k,a2),c2);
+    res.innerHTML=`n = ${n}  →  odd number = 2×${n}−1 = <strong>${m}</strong>\n${m} = ${sqN}² — <strong>perfect square! ✓</strong>\n(n−1)² + k² = n²  →  ${a2}² + ${sqN}² = ${n}²  →  ${a2*a2} + ${sqN*sqN} = ${n*n} ✓\n<span class="hit">${triple}</span>  ${p?'— Primitive':'— Scaled'}`;
   } else {
-    div.innerHTML=`<div class="gen-step">
-      <strong>n = ${n}</strong>: The ${n}th odd number is <span style="font-family:var(--mono);font-weight:700;color:var(--text3)">${m}</span>.
-      <span class="eq">${m} is not a perfect square.</span>
-      No Baudhāyana triple from this n. Try n = 5, 13, 25…
-    </div>`;
+    res.innerHTML=`n = ${n}  →  odd number = 2×${n}−1 = <strong>${m}</strong>\n<span class="miss">${m} is not a perfect square — no triple from this n.</span>\nTry: n = 5 (gives 9=3²), n = 13 (gives 25=5²), n = 25 (gives 49=7²)…`;
   }
 }
 
-document.getElementById('nSlider').oninput=renderGenerate;
+document.getElementById('n-sl').addEventListener('input',renderGenerate);
 
-// ── Scale ─────────────────────────────────────────────────────────────────
-function renderPrimGrid(){
+// ══ SCALE ══
+let selPrim={a:3,b:4,c:5},selK=1;
+
+function buildPrimSelector(){
   const triples=getAllTriples(50).filter(t=>t.prim);
-  const grid=document.getElementById('primGrid');
-  grid.innerHTML='';
+  const el=document.getElementById('prim-selector');
+  el.innerHTML='';
   triples.forEach(t=>{
-    const card=document.createElement('div');
-    card.className='triple-card primitive'+(selectedPrimTriple&&selectedPrimTriple.a===t.a&&selectedPrimTriple.b===t.b?' selected':'');
-    card.innerHTML=`<div class="triple-nums">(${t.a}, ${t.b}, ${t.c})</div><div class="triple-type prim">Primitive</div>`;
-    card.onclick=()=>{selectedPrimTriple=t;renderPrimGrid();renderScale();};
-    grid.appendChild(card);
+    const b=document.createElement('button');
+    const sel=selPrim.a===t.a&&selPrim.b===t.b;
+    b.className=`ps-btn${sel?' active':''}`;
+    b.textContent=`(${t.a},${t.b},${t.c})`;
+    b.addEventListener('click',()=>{selPrim=t;buildPrimSelector();renderFamily();});
+    el.appendChild(b);
   });
 }
 
-function renderScale(){
-  const k=parseInt(document.getElementById('kInput').value)||1;
-  const {a,b,c}=selectedPrimTriple;
-  const ka=a*k,kb=b*k,kc=c*k;
-  document.getElementById('scaleResult').innerHTML=
-    `(${a}, ${b}, ${c}) × ${k} = (${ka}, ${kb}, ${kc})\nCheck: ${ka}² + ${kb}² = ${ka*ka}+${kb*kb}=${ka*ka+kb*kb} = ${kc}² ✓`;
+function renderFamily(){
+  const k=selK;
+  document.getElementById('k-disp').textContent=k;
+  document.getElementById('k-sl').value=k;
+  const {a,b,c}=selPrim;
+  const grid=document.getElementById('family-grid');
+  grid.innerHTML='';
+  for(let ki=1;ki<=8;ki++){
+    const div=document.createElement('div');
+    div.className=`fam-card${ki===k?' highlight':''}`;
+    div.innerHTML=`<div class="fam-k">k = ${ki}</div>
+      <div class="fam-nums">(${a*ki}, ${b*ki}, ${c*ki})</div>
+      <div class="fam-check">${(a*ki)}²+${(b*ki)}²=${(a*ki)**2+(b*ki)**2}=${(c*ki)}²</div>`;
+    div.addEventListener('click',()=>{selK=ki;renderFamily();});
+    grid.appendChild(div);
+  }
 }
 
-document.getElementById('kInput').oninput=renderScale;
+document.getElementById('k-sl').addEventListener('input',e=>{selK=+e.target.value;renderFamily();});
 
-// ── Tabs ──────────────────────────────────────────────────────────────────
-document.getElementById('t0').onclick=()=>{
-  ['t0','t1','t2'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i===0));
-  ['viewBrowse','viewGenerate','viewScale'].forEach((id,i)=>document.getElementById(id).style.display=i===0?'block':'none');
-};
-document.getElementById('t1').onclick=()=>{
-  ['t0','t1','t2'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i===1));
-  ['viewBrowse','viewGenerate','viewScale'].forEach((id,i)=>document.getElementById(id).style.display=i===1?'block':'none');
-  renderGenerate();
-};
-document.getElementById('t2').onclick=()=>{
-  ['t0','t1','t2'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i===2));
-  ['viewBrowse','viewGenerate','viewScale'].forEach((id,i)=>document.getElementById(id).style.display=i===2?'block':'none');
-  renderPrimGrid(); renderScale();
-};
+// ══ MODE ══
+document.querySelectorAll('.mode-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.mode-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const m=b.dataset.m;
+    document.getElementById('browse-view').style.display=m==='browse'?'':'none';
+    document.getElementById('generate-view').style.display=m==='generate'?'':'none';
+    document.getElementById('scale-view').style.display=m==='scale'?'':'none';
+    if(m==='generate') renderGenerate();
+    if(m==='scale'){buildPrimSelector();renderFamily();}
+  });
+});
+
+window.addEventListener('resize',()=>{if(selTriple) drawTriple('tri-canvas',selTriple.a,selTriple.b,selTriple.c);});
 
 renderBrowse();
+// Pre-select (3,4,5)
+const first=getAllTriples(30)[0];
+if(first){selTriple=first;renderBrowse();showTriple(first);}
 </script>
 </body>
 </html>
